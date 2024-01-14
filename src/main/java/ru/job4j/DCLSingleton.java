@@ -4,6 +4,9 @@ public final class DCLSingleton {
 
     private static volatile DCLSingleton instance;
 
+    private DCLSingleton() {
+    }
+
     public static DCLSingleton getInstance() {
         if (instance == null) {
             synchronized (DCLSingleton.class) {
@@ -14,8 +17,4 @@ public final class DCLSingleton {
         }
         return instance;
     }
-
-    private DCLSingleton() {
-    }
-
 }
