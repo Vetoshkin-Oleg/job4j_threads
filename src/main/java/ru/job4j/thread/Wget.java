@@ -18,21 +18,34 @@ public class Wget implements Runnable {
 
     @Override
     public void run() {
-        var file = new File("tmp.xml");
+        var file = new File(getNameFile(url));
+        System.out.println("Адрес файла для сохранения образуется из исходного интернет-адреса");
         try (var input = new URL(url).openStream();
              var output = new FileOutputStream(file)) {
             var dataBuffer = new byte[1024];
             int bytesRead;
+            int currentValueBytes = 0;
+            var start = System.currentTimeMillis();
+            var downloadAt = start;
             while ((bytesRead = input.read(dataBuffer, 0, dataBuffer.length)) != -1) {
-                var downloadAt = System.nanoTime();
                 output.write(dataBuffer, 0, bytesRead);
-                var currentDurationNanos = System.nanoTime() - downloadAt;
-                double currentSpeedMillis = (double) bytesRead * 1_000_000 / currentDurationNanos;
-                if (currentSpeedMillis > speed) {
-                    double allowedDownloadTime = (double) bytesRead / speed;
-                    double executionDelay = allowedDownloadTime - ((double) currentDurationNanos / 1_000_000);
-                    Thread.sleep((long) executionDelay);
+                currentValueBytes += bytesRead;
+                if (currentValueBytes >= speed) {
+                    var currentDurationMillis = System.currentTimeMillis() - downloadAt;
+                    double allowedDownloadTime = (double) currentValueBytes / speed;
+                    double executionDelay = allowedDownloadTime - ((double) currentDurationMillis);
+                    if (executionDelay > 0) {
+                        Thread.sleep((long) executionDelay);
+                    }
+                    currentValueBytes = 0;
+                    downloadAt = System.currentTimeMillis();
                 }
+            }
+            var totalDurationMillis = System.currentTimeMillis() - start;
+            double allowedDownloadTime = (double) bytesRead / speed;
+            double executionDelay = allowedDownloadTime - ((double) totalDurationMillis);
+            if (executionDelay > 0) {
+                Thread.sleep((long) executionDelay);
             }
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
@@ -42,34 +55,39 @@ public class Wget implements Runnable {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        System.out.println("Скорость скачивания указана в аргументах программы в виде (Байт / мс)");
         if (args.length != 2) {
-            System.out.println("Количество входных параметров программы не равно двум");
-            return;
+            throw new RuntimeException("Количество входных параметров программы не равно двум");
         }
         String url = args[0];
-        if (!validateInternetAddress(url)) {
-            System.out.println("Некорректный интернет-адрес");
-            return;
-        }
+        validateInternetAddress(url);
         int speed;
         try {
             speed = Integer.parseInt(args[1]);
+            if (speed < 1) {
+                throw new NumberFormatException();
+            }
         } catch (NumberFormatException e) {
-            System.out.println("Некорректное значение скорости");
-            return;
+            throw new NumberFormatException("Некорректное значение скорости");
         }
+        System.out.println("Адрес для скачивания указан первым аргументом программы");
+        System.out.println("Скорость скачивания указана вторым аргументом программы в виде (Байт/мс)");
         Thread wget = new Thread(new Wget(url, speed));
         wget.start();
         wget.join();
     }
 
-    public static boolean validateInternetAddress(String url) {
+    public static void validateInternetAddress(String url) {
         try {
             new URL(url).toURI();
-            return true;
         } catch (URISyntaxException | MalformedURLException exception) {
-            return false;
+            throw new RuntimeException("Некорректный интернет-адрес");
         }
+    }
+
+    public static String getNameFile(String url) {
+        String name = url.substring(url.lastIndexOf("/") + 1);
+        return name.substring(0, name.lastIndexOf("."))
+                .concat("Save")
+                .concat(name.substring(name.lastIndexOf(".")));
     }
 }
