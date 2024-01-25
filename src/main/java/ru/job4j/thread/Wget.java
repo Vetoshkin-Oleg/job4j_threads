@@ -25,8 +25,7 @@ public class Wget implements Runnable {
             var dataBuffer = new byte[1024];
             int bytesRead;
             int currentValueBytes = 0;
-            var start = System.currentTimeMillis();
-            var downloadAt = start;
+            var downloadAt = System.currentTimeMillis();
             while ((bytesRead = input.read(dataBuffer, 0, dataBuffer.length)) != -1) {
                 output.write(dataBuffer, 0, bytesRead);
                 currentValueBytes += bytesRead;
@@ -40,12 +39,6 @@ public class Wget implements Runnable {
                     currentValueBytes = 0;
                     downloadAt = System.currentTimeMillis();
                 }
-            }
-            var totalDurationMillis = System.currentTimeMillis() - start;
-            double allowedDownloadTime = (double) bytesRead / speed;
-            double executionDelay = allowedDownloadTime - ((double) totalDurationMillis);
-            if (executionDelay > 0) {
-                Thread.sleep((long) executionDelay);
             }
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
