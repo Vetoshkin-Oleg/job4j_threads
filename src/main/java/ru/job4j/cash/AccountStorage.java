@@ -13,29 +13,19 @@ public class AccountStorage {
 
     public boolean add(Account account) {
         synchronized (accounts) {
-            accounts.put(account.id(), account);
-            return accounts.containsKey(account.id());
+            return accounts.putIfAbsent(account.id(), account) == null;
         }
     }
 
     public boolean update(Account account) {
         synchronized (accounts) {
-            boolean result = false;
-            if (accounts.containsKey(account.id())) {
-                accounts.put(account.id(), account);
-                result = true;
-            }
-            return result;
+            return accounts.replace(account.id(), account) != null;
         }
     }
 
     public void delete(int id) {
         synchronized (accounts) {
-            if (accounts.containsKey(id)) {
-                accounts.put(id, null);
-            } else {
-                throw new IllegalStateException("Not found account by id = " + id);
-            }
+            accounts.remove(id);
         }
     }
 
@@ -47,7 +37,7 @@ public class AccountStorage {
 
     public boolean transfer(int fromId, int toId, int amount) {
         synchronized (accounts) {
-            if (!accounts.containsKey(fromId) || !accounts.containsKey(toId)) {
+            if (getById(fromId).isEmpty() || getById(toId).isEmpty()) {
                 return false;
             }
             if (accounts.get(fromId).amount() < amount) {
