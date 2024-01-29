@@ -37,14 +37,18 @@ public class AccountStorage {
 
     public boolean transfer(int fromId, int toId, int amount) {
         synchronized (accounts) {
-            if (getById(fromId).isEmpty() || getById(toId).isEmpty()) {
+            Optional<Account> accountFrom = getById(fromId);
+            Optional<Account> accountTo = getById(toId);
+            if (accountFrom.isEmpty() || accountTo.isEmpty()) {
                 return false;
             }
-            if (accounts.get(fromId).amount() < amount) {
+            int amountFrom = accountFrom.get().amount();
+            int amountTo = accountTo.get().amount();
+            if (amountFrom < amount) {
                 return false;
             }
-            accounts.put(fromId, new Account(fromId, accounts.get(fromId).amount() - amount));
-            accounts.put(toId, new Account(toId, accounts.get(toId).amount() + amount));
+            accounts.put(fromId, new Account(fromId, amountFrom - amount));
+            accounts.put(toId, new Account(toId, amountTo + amount));
             return true;
         }
     }
