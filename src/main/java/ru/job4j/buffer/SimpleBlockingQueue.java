@@ -1,0 +1,48 @@
+package ru.job4j.buffer;
+
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+@ThreadSafe
+public class SimpleBlockingQueue<T> {
+
+    @GuardedBy("this")
+    private Queue<T> queue = new LinkedList<>();
+    private final int limit;
+
+    public SimpleBlockingQueue(int limit) {
+        this.limit = limit;
+    }
+
+    public synchronized void offer(T value) throws InterruptedException {
+        System.out.println("[SimpleBlockingQueue] try to offer: " + value);
+        while (this.queue.size() == this.limit) {
+            System.out.println("[SimpleBlockingQueue] queue is full, waiting until space is free");
+            wait();
+        }
+        if (this.queue.size() == 0) {
+            System.out.println("[SimpleBlockingQueue] queue is empty, notify");
+            notifyAll();
+        }
+        this.queue.add(value);
+        System.out.println("[SimpleBlockingQueue] offer ok: " + value);
+    }
+
+    public synchronized T poll() throws InterruptedException {
+        System.out.println("[SimpleBlockingQueue] try to poll");
+        while (this.queue.size() == 0) {
+            System.out.println("[SimpleBlockingQueue] queue is empty, waiting until smth is offer");
+            wait();
+        }
+        if (this.queue.size() == this.limit) {
+            System.out.println("[SimpleBlockingQueue] queue is full, notify");
+            notifyAll();
+        }
+        T value = this.queue.poll();
+        System.out.println("[SimpleBlockingQueue] poll ok: " + value);
+        return value;
+    }
+}
