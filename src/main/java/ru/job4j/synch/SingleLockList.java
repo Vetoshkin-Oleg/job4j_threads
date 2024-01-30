@@ -9,30 +9,24 @@ import java.util.List;
 
 @ThreadSafe
 public class SingleLockList<T> implements Iterable<T> {
-    @GuardedBy("list")
+    @GuardedBy("this")
     private final List<T> list;
 
     public SingleLockList(List<T> list) {
         this.list = copy(list);
     }
 
-    public void add(T value) {
-        synchronized (list) {
-            list.add(value);
-        }
+    public synchronized void add(T value) {
+        list.add(value);
     }
 
-    public T get(int index) {
-        synchronized (list) {
-            return list.get(index);
-        }
+    public synchronized T get(int index) {
+        return list.get(index);
     }
 
     @Override
-    public Iterator<T> iterator() {
-        synchronized (list) {
-            return copy(list).iterator();
-        }
+    public synchronized Iterator<T> iterator() {
+        return copy(list).iterator();
     }
 
     private synchronized List<T> copy(List<T> origin) {
