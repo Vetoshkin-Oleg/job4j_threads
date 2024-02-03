@@ -1,7 +1,7 @@
 package concurrency.chapter2;
 
 public class Main {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         Thread one = new Thread(() -> {
             Widget widget = new Widget();
             widget.doSomething();
