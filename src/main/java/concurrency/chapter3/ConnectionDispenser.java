@@ -15,7 +15,7 @@ public class ConnectionDispenser {
     static String dbURL = "jdbc:mysql://localhost/mydatabase";
 
     private ThreadLocal<Connection> connectionHolder
-            = new ThreadLocal<Connection>() {
+            = new ThreadLocal<>() {
         public Connection initialValue() {
             try {
                 return DriverManager.getConnection(dbURL);
