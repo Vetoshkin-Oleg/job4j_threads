@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 /**
  * PrimeGenerator
@@ -48,7 +48,7 @@ public class PrimeGenerator implements Runnable {
         PrimeGenerator generator = new PrimeGenerator();
         EXEC.execute(generator);
         try {
-            SECONDS.sleep(1);
+            MILLISECONDS.sleep(1000);
         } finally {
             generator.cancel();
         }
