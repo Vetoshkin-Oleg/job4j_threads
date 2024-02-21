@@ -11,7 +11,7 @@ import net.jcip.annotations.ThreadSafe;
  */
 @ThreadSafe
 public class CasCounter {
-    private SimulatedCAS value;
+    private final SimulatedCAS value = new SimulatedCAS();
 
     public int getValue() {
         return value.get();
@@ -20,8 +20,13 @@ public class CasCounter {
     public int increment() {
         int v;
         do {
-            v = value.get();
+            v = getValue();
         } while (v != value.compareAndSwap(v, v + 1));
         return v + 1;
+    }
+
+    public static void main(String[] args) {
+        CasCounter casCounter = new CasCounter();
+        System.out.println("main " + casCounter.increment());
     }
 }
