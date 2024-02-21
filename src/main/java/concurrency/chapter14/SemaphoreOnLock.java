@@ -18,7 +18,7 @@ import java.util.concurrent.locks.ReentrantLock;
 @ThreadSafe
 public class SemaphoreOnLock {
     private final Lock lock = new ReentrantLock();
-    // CONDITION PREDICATE: permitsAvailable (permits > 0)
+     /*CONDITION PREDICATE: permitsAvailable (permits > 0)*/
     private final Condition permitsAvailable = lock.newCondition();
     @GuardedBy("lock") private int permits;
 
@@ -31,7 +31,7 @@ public class SemaphoreOnLock {
         }
     }
 
-    // BLOCKS-UNTIL: permitsAvailable
+     /*BLOCKS-UNTIL: permitsAvailable*/
     public void acquire() throws InterruptedException {
         lock.lock();
         try {

@@ -11,8 +11,8 @@ import net.jcip.annotations.ThreadSafe;
  */
 @ThreadSafe
 public class BoundedBuffer<V> extends BaseBoundedBuffer<V> {
-    // CONDITION PREDICATE: not-full (!isFull())
-    // CONDITION PREDICATE: not-empty (!isEmpty())
+     /*CONDITION PREDICATE: not-full (!isFull())
+     CONDITION PREDICATE: not-empty (!isEmpty())*/
     public BoundedBuffer() {
         this(100);
     }
@@ -21,7 +21,7 @@ public class BoundedBuffer<V> extends BaseBoundedBuffer<V> {
         super(size);
     }
 
-    // BLOCKS-UNTIL: not-full
+     /*BLOCKS-UNTIL: not-full*/
     public synchronized void put(V v) throws InterruptedException {
         while (isFull()) {
             wait();
@@ -30,7 +30,7 @@ public class BoundedBuffer<V> extends BaseBoundedBuffer<V> {
         notifyAll();
     }
 
-    // BLOCKS-UNTIL: not-empty
+     /*BLOCKS-UNTIL: not-empty*/
     public synchronized V take() throws InterruptedException {
         while (isEmpty()) {
             wait();
@@ -40,8 +40,8 @@ public class BoundedBuffer<V> extends BaseBoundedBuffer<V> {
         return v;
     }
 
-    // BLOCKS-UNTIL: not-full
-    // Alternate form of put() using conditional notification
+     /*BLOCKS-UNTIL: not-full
+     Alternate form of put() using conditional notification*/
     public synchronized void alternatePut(V v) throws InterruptedException {
         while (isFull()) {
             wait();

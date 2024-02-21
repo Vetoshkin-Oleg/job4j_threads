@@ -42,7 +42,7 @@ class ExampleUsage {
         while (true) {
             try {
                 String item = buffer.take();
-                // use item
+                 /*use item*/
                 break;
             } catch (BufferEmptyException e) {
                 Thread.sleep(sleepGranularity);

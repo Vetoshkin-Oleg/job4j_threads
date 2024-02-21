@@ -34,7 +34,7 @@ public class ConcurrentPuzzleSolver<P, M> {
         try {
             P p = puzzle.initialPosition();
             exec.execute(newTask(p, null, null));
-            // block until solution found
+             /*block until solution found*/
             PuzzleNode<P, M> solnPuzzleNode = solution.getValue();
             return (solnPuzzleNode == null) ? null : solnPuzzleNode.asMoveList();
         } finally {
@@ -53,7 +53,7 @@ public class ConcurrentPuzzleSolver<P, M> {
 
         public void run() {
             if (solution.isSet() || seen.putIfAbsent(pos, true) != null) {
-                return; // already solved or seen this position
+                return; /*already solved or seen this position*/
             }
             if (puzzle.isGoal(pos)) {
                 solution.setValue(this);

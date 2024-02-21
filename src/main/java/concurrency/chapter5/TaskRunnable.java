@@ -16,13 +16,13 @@ public class TaskRunnable implements Runnable {
         try {
             processTask(queue.take());
         } catch (InterruptedException e) {
-            // restore interrupted status
+             /*restore interrupted status*/
             Thread.currentThread().interrupt();
         }
     }
 
     void processTask(Task task) {
-        // Handle the task
+         /*Handle the task*/
     }
 
     interface Task {

@@ -52,7 +52,7 @@ public class ListenerExamples {
 
     private final JButton startButton = new JButton("Start");
     private final JButton cancelButton = new JButton("Cancel");
-    private Future<?> runningTask = null; // thread-confined
+    private Future<?> runningTask = null; /*thread-confined*/
 
     private void taskWithCancellation() {
         startButton.addActionListener(e -> {

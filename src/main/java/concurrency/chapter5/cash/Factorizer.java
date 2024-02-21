@@ -41,7 +41,7 @@ public class Factorizer extends GenericServlet implements Servlet {
     }
 
     BigInteger[] factor(BigInteger i) {
-        // Doesn't really factor
+         /*Doesn't really factor*/
         return new BigInteger[]{i};
     }
 }

@@ -29,7 +29,7 @@ public class MyAppThread extends Thread {
     }
 
     public void run() {
-        // Copy debug flag to ensure consistent value throughout.
+         /*Copy debug flag to ensure consistent value throughout.*/
         boolean debug = debugLifecycle;
         if (debug) {
             LOG.log(Level.FINE, "Created " + getName());

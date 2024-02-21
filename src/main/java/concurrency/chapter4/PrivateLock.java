@@ -17,7 +17,7 @@ public class PrivateLock {
 
     void someMethod() {
         synchronized (myLock) {
-            // Access or modify the state of widget
+             /*Access or modify the state of widget*/
             widget = new Widget();
         }
     }

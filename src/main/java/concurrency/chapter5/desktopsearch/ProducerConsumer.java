@@ -70,7 +70,7 @@ public class ProducerConsumer {
         }
 
         public void indexFile(File file) {
-            // Index the file...
+             /*Index the file...*/
         }
     }
 

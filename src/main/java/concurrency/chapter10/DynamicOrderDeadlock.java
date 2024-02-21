@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author Brian Goetz and Tim Peierls
  */
 public class DynamicOrderDeadlock {
-    // Warning: deadlock-prone!
+     /*Warning: deadlock-prone!*/
     public static void transferMoney(Account fromAccount,
                                      Account toAccount,
                                      DollarAmount amount)
@@ -28,7 +28,7 @@ public class DynamicOrderDeadlock {
     }
 
     static class DollarAmount implements Comparable<DollarAmount> {
-        // Needs implementation
+         /*Needs implementation*/
 
         public DollarAmount(int amount) {
         }

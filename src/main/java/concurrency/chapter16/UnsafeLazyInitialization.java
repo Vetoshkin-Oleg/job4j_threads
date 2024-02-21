@@ -15,7 +15,7 @@ public class UnsafeLazyInitialization {
 
     public static Resource getInstance() {
         if (resource == null) {
-            resource = new Resource(); // unsafe publication
+            resource = new Resource(); /*unsafe publication*/
         }
         return resource;
     }

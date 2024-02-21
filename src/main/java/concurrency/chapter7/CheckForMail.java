@@ -33,7 +33,7 @@ public class CheckForMail {
     }
 
     private boolean checkMail(String host) {
-        // Check for mail
+         /*Check for mail*/
         return false;
     }
 }

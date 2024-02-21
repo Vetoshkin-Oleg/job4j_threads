@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class CasNumberRange {
     @Immutable
     private static class IntPair {
-        // INVARIANT: lower <= upper
+         /*INVARIANT: lower <= upper*/
         final int lower;
         final int upper;
 

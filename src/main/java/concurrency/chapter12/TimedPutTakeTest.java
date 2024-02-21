@@ -35,7 +35,7 @@ public class TimedPutTakeTest extends PutTakeTest {
     }
 
     public static void main(String[] args) throws Exception {
-        int tpt = 100000; // trials per thread
+        int tpt = 100000; /*trials per thread*/
         for (int cap = 1; cap <= 1000; cap *= 10) {
             System.out.println("Capacity: " + cap);
             for (int pairs = 1; pairs <= 128; pairs *= 2) {

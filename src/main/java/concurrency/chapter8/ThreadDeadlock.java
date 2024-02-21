@@ -23,7 +23,7 @@ public class ThreadDeadlock {
         }
 
         public String call() throws Exception {
-            // Here's where we would actually read the file
+             /*Here's where we would actually read the file*/
             return "";
         }
     }
@@ -34,12 +34,12 @@ public class ThreadDeadlock {
             header = exec.submit(new LoadFileTask("header.html"));
             footer = exec.submit(new LoadFileTask("footer.html"));
             String page = renderBody();
-            // Will deadlock -- task waiting for result of subtask
+             /*Will deadlock -- task waiting for result of subtask*/
             return header.get() + page + footer.get();
         }
 
         private String renderBody() {
-            // Here's where we would actually render the page
+             /*Here's where we would actually render the page*/
             return "";
         }
     }

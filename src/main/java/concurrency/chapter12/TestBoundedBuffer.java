@@ -34,7 +34,7 @@ public class TestBoundedBuffer extends TestCase {
         Thread taker = new Thread(() -> {
             try {
                 int unused = bb.take();
-                fail(); // if we get here, it's an error
+                fail(); /*if we get here, it's an error*/
             } catch (InterruptedException success) {
                 System.out.println("InterruptedException success");
             }

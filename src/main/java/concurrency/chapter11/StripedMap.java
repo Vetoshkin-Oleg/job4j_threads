@@ -11,7 +11,7 @@ import net.jcip.annotations.ThreadSafe;
  */
 @ThreadSafe
 public class StripedMap {
-    // Synchronization policy: buckets[n] guarded by locks[n%N_LOCKS]
+     /*Synchronization policy: buckets[n] guarded by locks[n%N_LOCKS]*/
     private static final int N_LOCKS = 16;
     private final Node[] buckets;
     private final Object[] locks;

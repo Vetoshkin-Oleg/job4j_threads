@@ -49,7 +49,7 @@ public class CellularAutomata {
         }
 
         private int computeValue(int x, int y) {
-            // Compute the new value that goes in (x,y)
+             /*Compute the new value that goes in (x,y)*/
             return 0;
         }
     }

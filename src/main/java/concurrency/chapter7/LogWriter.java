@@ -34,7 +34,7 @@ public class LogWriter {
         private final PrintWriter writer;
 
         public LoggerThread(Writer writer) {
-            this.writer = new PrintWriter(writer, true); // autoflush
+            this.writer = new PrintWriter(writer, true); /*autoflush*/
         }
 
         public void run() {

@@ -41,7 +41,7 @@ public class DelegatingVehicleTracker {
         }
     }
 
-    // Alternate version of getLocations()
+     /*Alternate version of getLocations()*/
     public Map<String, Point> getLocationsAsStatic() {
         return Collections.unmodifiableMap(
                 new HashMap<>(locations));

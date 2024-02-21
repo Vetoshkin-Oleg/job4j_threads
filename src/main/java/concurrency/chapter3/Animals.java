@@ -19,7 +19,7 @@ public class Animals {
         int numPairs = 0;
         Animal candidate = null;
 
-        // animals confined to method, don't let them escape!
+         /*animals confined to method, don't let them escape!*/
         animals = new TreeSet<>(new SpeciesGenderComparator());
         animals.addAll(candidates);
         for (Animal a : animals) {

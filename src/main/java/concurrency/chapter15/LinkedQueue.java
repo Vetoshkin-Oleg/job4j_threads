@@ -37,12 +37,12 @@ public class LinkedQueue<E> {
             LinkedQueue.Node<E> tailNext = curTail.next.get();
             if (curTail == tail.get()) {
                 if (tailNext != null) {
-                    // Queue in intermediate state, advance tail
+                     /*Queue in intermediate state, advance tail*/
                     tail.compareAndSet(curTail, tailNext);
                 } else {
-                    // In quiescent state, try inserting new node
+                     /*In quiescent state, try inserting new node*/
                     if (curTail.next.compareAndSet(null, newNode)) {
-                        // Insertion succeeded, try advancing tail
+                         /*Insertion succeeded, try advancing tail*/
                         tail.compareAndSet(curTail, newNode);
                         return true;
                     }

@@ -11,12 +11,12 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 
 public class NumberRange {
-    // INVARIANT: lower <= upper
+     /*INVARIANT: lower <= upper*/
     private final AtomicInteger lower = new AtomicInteger(0);
     private final AtomicInteger upper = new AtomicInteger(0);
 
     public void setLower(int i) {
-        // Warning -- unsafe check-then-act
+         /*Warning -- unsafe check-then-act*/
         if (i > upper.get()) {
             throw new IllegalArgumentException("can't set lower to " + i + " > upper");
         }
@@ -24,7 +24,7 @@ public class NumberRange {
     }
 
     public void setUpper(int i) {
-        // Warning -- unsafe check-then-act
+         /*Warning -- unsafe check-then-act*/
         if (i < lower.get()) {
             throw new IllegalArgumentException("can't set upper to " + i + " < lower");
         }

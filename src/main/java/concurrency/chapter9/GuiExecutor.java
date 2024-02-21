@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
  * @author Brian Goetz and Tim Peierls
  */
 public class GuiExecutor extends AbstractExecutorService {
-    // Singletons have a private constructor and a public factory
+     /*Singletons have a private constructor and a public factory*/
     private static final GuiExecutor INSTANCE = new GuiExecutor();
 
     private GuiExecutor() {

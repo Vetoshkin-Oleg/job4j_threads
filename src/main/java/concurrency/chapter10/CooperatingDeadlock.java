@@ -14,7 +14,7 @@ import java.util.Set;
  * @author Brian Goetz and Tim Peierls
  */
 public class CooperatingDeadlock {
-    // Warning: deadlock-prone!
+     /*Warning: deadlock-prone!*/
     class Taxi {
         @GuardedBy("this")
         private Point location, destination;

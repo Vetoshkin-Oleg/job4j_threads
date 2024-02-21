@@ -18,7 +18,7 @@ public class NoncancelableTask {
                     return queue.take();
                 } catch (InterruptedException e) {
                     interrupted = true;
-                    // fall through and retry
+                     /*fall through and retry*/
                 }
             }
         } finally {

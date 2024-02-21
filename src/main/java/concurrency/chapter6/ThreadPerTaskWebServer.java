@@ -23,6 +23,6 @@ public class ThreadPerTaskWebServer {
     }
 
     private static void handleRequest(Socket connection) {
-        // request-handling logic here
+         /*request-handling logic here*/
     }
 }

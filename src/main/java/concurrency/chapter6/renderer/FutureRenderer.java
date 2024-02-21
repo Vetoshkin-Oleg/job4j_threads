@@ -36,9 +36,9 @@ public abstract class FutureRenderer {
                 renderImage(data);
             }
         } catch (InterruptedException e) {
-            // Re-assert the thread's interrupted status
+             /*Re-assert the thread's interrupted status*/
             Thread.currentThread().interrupt();
-            // We don't need the result, so cancel the task too
+             /*We don't need the result, so cancel the task too*/
             future.cancel(true);
         } catch (ExecutionException e) {
             throw launderThrowable(e.getCause());

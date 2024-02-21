@@ -21,11 +21,11 @@ public class TimedRun {
         } catch (TimeoutException e) {
             System.out.println("task will be cancelled below");
         } catch (ExecutionException e) {
-            // exception thrown in task; rethrow
+             /*exception thrown in task; rethrow*/
             throw launderThrowable(e.getCause());
         } finally {
-            // Harmless if task already completed
-            task.cancel(true); // interrupt if running
+             /*Harmless if task already completed*/
+            task.cancel(true); /*interrupt if running*/
         }
     }
 }

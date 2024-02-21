@@ -23,6 +23,6 @@ public class SingleThreadWebServer {
     }
 
     private static void handleRequest(Socket connection) {
-        // request-handling logic here
+         /*request-handling logic here*/
     }
 }

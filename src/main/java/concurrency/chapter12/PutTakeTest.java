@@ -23,7 +23,7 @@ public class PutTakeTest extends TestCase {
     protected final AtomicInteger takeSum = new AtomicInteger(0);
 
     public static void main(String[] args) throws Exception {
-        new PutTakeTest(10, 10, 100000).test(); // sample parameters
+        new PutTakeTest(10, 10, 100000).test(); /*sample parameters*/
         POOL.shutdown();
     }
 
@@ -40,8 +40,8 @@ public class PutTakeTest extends TestCase {
                 POOL.execute(new Producer());
                 POOL.execute(new Consumer());
             }
-            barrier.await(); // wait for all threads to be ready
-            barrier.await(); // wait for all threads to finish
+            barrier.await(); /*wait for all threads to be ready*/
+            barrier.await(); /*wait for all threads to finish*/
             assertEquals(putSum.get(), takeSum.get());
         } catch (Exception e) {
             throw new RuntimeException(e);

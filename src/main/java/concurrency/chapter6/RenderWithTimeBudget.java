@@ -19,11 +19,11 @@ public class RenderWithTimeBudget {
     Page renderPageWithAd() throws InterruptedException {
         long endNanos = System.nanoTime() + TIME_BUDGET;
         Future<Ad> f = EXEC.submit(new FetchAdTask());
-        // Render the page while waiting for the ad
+         /*Render the page while waiting for the ad*/
         Page page = renderPageBody();
         Ad ad;
         try {
-            // Only wait for the remaining time budget
+             /*Only wait for the remaining time budget*/
             long timeLeft = endNanos - System.nanoTime();
             ad = f.get(timeLeft, NANOSECONDS);
         } catch (ExecutionException e) {

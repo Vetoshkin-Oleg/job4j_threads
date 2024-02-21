@@ -17,6 +17,6 @@ public class CountingSheep {
     }
 
     void countSomeSheep() {
-        // One, two, three...
+         /*One, two, three...*/
     }
 }

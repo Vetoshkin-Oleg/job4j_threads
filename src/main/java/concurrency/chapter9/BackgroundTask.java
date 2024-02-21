@@ -42,17 +42,17 @@ public abstract class BackgroundTask<V> implements Runnable, Future<V> {
         GuiExecutor.instance().execute(() -> onProgress(current, max));
     }
 
-    // Called in the background thread
+     /*Called in the background thread*/
     protected abstract V compute() throws Exception;
 
-    // Called in the event thread
+     /*Called in the event thread*/
     protected void onCompletion(V result, Throwable exception, boolean cancelled) {
     }
 
     protected void onProgress(int current, int max) {
     }
 
-    // Other Future methods just forwarded to computation
+     /*Other Future methods just forwarded to computation*/
     public boolean cancel(boolean mayInterruptIfRunning) {
         return computation.cancel(mayInterruptIfRunning);
     }
