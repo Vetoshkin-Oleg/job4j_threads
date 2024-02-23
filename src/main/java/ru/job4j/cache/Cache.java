@@ -13,13 +13,18 @@ public class Cache {
         return memory.putIfAbsent(model.id(), model) == null;
     }
 
-    public boolean update(Base model) throws OptimisticException {
-        /* TODO impl */
-        return false;
+    public boolean update(Base model) {
+        return memory.computeIfPresent(model.id(), (id, base) -> {
+            Base stored = memory.get(model.id());
+            if (stored.version() != model.version()) {
+                throw new OptimisticException("Versions are not equal");
+            }
+            return new Base(model.id(), model.name(), model.version() + 1);
+        }) != null;
     }
 
     public void delete(int id) {
-        /* TODO impl */
+        memory.remove(id);
     }
 
     public Optional<Base> findById(int id) {
