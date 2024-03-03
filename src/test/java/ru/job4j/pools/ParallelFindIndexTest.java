@@ -55,7 +55,7 @@ class ParallelFindIndexTest {
         Character object = 'D';
         ForkJoinPool forkJoinPool = new ForkJoinPool();
         ParallelFindIndex<Character> parallelFindIndex =
-                new ParallelFindIndex<>(characters, object, 0, characters.length);
+                new ParallelFindIndex<>(characters, object, 0, characters.length - 1);
         assertThat(forkJoinPool.invoke(parallelFindIndex)).isEqualTo(-1);
     }
 
@@ -67,7 +67,7 @@ class ParallelFindIndexTest {
         Integer object = 7;
         ForkJoinPool forkJoinPool = new ForkJoinPool();
         ParallelFindIndex<Integer> parallelFindIndex =
-                new ParallelFindIndex<>(ints, object, 0, ints.length);
+                new ParallelFindIndex<>(ints, object, 0, ints.length - 1);
         assertThat(forkJoinPool.invoke(parallelFindIndex)).isEqualTo(7);
     }
 
@@ -79,7 +79,7 @@ class ParallelFindIndexTest {
         Integer object = 7;
         ForkJoinPool forkJoinPool = new ForkJoinPool();
         ParallelFindIndex<Integer> parallelFindIndex =
-                new ParallelFindIndex<>(ints, object, 0, ints.length);
+                new ParallelFindIndex<>(ints, object, 0, ints.length - 1);
         assertThat(forkJoinPool.invoke(parallelFindIndex)).isEqualTo(10);
     }
 
@@ -96,14 +96,50 @@ class ParallelFindIndexTest {
     }
 
     @Test
-    void parallelSearchWhen21ElementsIntegerVer2() {
+    void parallelSearchWhen21ElementsIntegerVer1() {
         Integer[] ints = new Integer[21];
         Arrays.fill(ints, 5);
         ints[20] = 7;
         Integer object = 7;
         ForkJoinPool forkJoinPool = new ForkJoinPool();
         ParallelFindIndex<Integer> parallelFindIndex =
-                new ParallelFindIndex<>(ints, object, 0, ints.length);
+                new ParallelFindIndex<>(ints, object, 0, ints.length - 1);
         assertThat(forkJoinPool.invoke(parallelFindIndex)).isEqualTo(20);
+    }
+
+    @Test
+    void parallelSearchWhen21ElementsIntegerVer2() {
+        Integer[] ints = new Integer[21];
+        Arrays.fill(ints, 5);
+        ints[9] = 7;
+        Integer object = 7;
+        ForkJoinPool forkJoinPool = new ForkJoinPool();
+        ParallelFindIndex<Integer> parallelFindIndex =
+                new ParallelFindIndex<>(ints, object, 0, ints.length - 1);
+        assertThat(forkJoinPool.invoke(parallelFindIndex)).isEqualTo(9);
+    }
+
+    @Test
+    void parallelSearchWhen21ElementsIntegerVer3() {
+        Integer[] ints = new Integer[21];
+        Arrays.fill(ints, 5);
+        ints[10] = 7;
+        Integer object = 7;
+        ForkJoinPool forkJoinPool = new ForkJoinPool();
+        ParallelFindIndex<Integer> parallelFindIndex =
+                new ParallelFindIndex<>(ints, object, 0, ints.length - 1);
+        assertThat(forkJoinPool.invoke(parallelFindIndex)).isEqualTo(10);
+    }
+
+    @Test
+    void parallelSearchWhen21ElementsIntegerVer4() {
+        Integer[] ints = new Integer[21];
+        Arrays.fill(ints, 5);
+        ints[11] = 7;
+        Integer object = 7;
+        ForkJoinPool forkJoinPool = new ForkJoinPool();
+        ParallelFindIndex<Integer> parallelFindIndex =
+                new ParallelFindIndex<>(ints, object, 0, ints.length);
+        assertThat(forkJoinPool.invoke(parallelFindIndex)).isEqualTo(11);
     }
 }
