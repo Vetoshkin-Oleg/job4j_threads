@@ -31,8 +31,7 @@ public class Wget implements Runnable {
                 currentValueBytes += bytesRead;
                 if (currentValueBytes >= speed) {
                     var currentDurationMillis = System.currentTimeMillis() - downloadAt;
-                    double allowedDownloadTime = (double) currentValueBytes / speed;
-                    double executionDelay = allowedDownloadTime - ((double) currentDurationMillis);
+                    double executionDelay = (double) currentValueBytes / speed - ((double) currentDurationMillis);
                     if (executionDelay > 0) {
                         Thread.sleep((long) executionDelay);
                     }
